@@ -1,0 +1,98 @@
+public abstract class ManejadorDeAyuda {
+    protected ManejadorDeAyuda siguiente;
+
+    public ManejadorDeAyuda(ManejadorDeAyuda siguiente) {
+        this.siguiente = siguiente;
+    }
+
+    public abstract void manejarAyuda();
+}
+
+public class ManejadorDeAyudaAplicacion extends ManejadorDeAyuda {
+    public ManejadorDeAyudaAplicacion(ManejadorDeAyuda siguiente) {
+        super(siguiente);
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void manejarAyuda() {
+        if (ayudaEsNecesariaParaAplicacion()) {
+            mostrarAyudaParaAplicacion();
+        } else {
+            siguiente.manejarAyuda();
+        }
+    }
+
+    private boolean ayudaEsNecesariaParaAplicacion() {
+        // Lógica para determinar si se necesita ayuda para la aplicación en general
+        return false;
+        // Lógica para determinar si se necesita ayuda para la aplicación en general
+    }
+
+    private void mostrarAyudaParaAplicacion() {
+        // Lógica para mostrar ayuda para la aplicación en general
+    }
+}
+
+
+public class ManejadorDeAyudaBoton extends ManejadorDeAyuda {
+    public ManejadorDeAyudaBoton(ManejadorDeAyuda siguiente) {
+        super(siguiente);
+    }
+
+    public void manejarAyuda() {
+        if (ayudaEsNecesariaParaBoton()) {
+            mostrarAyudaParaBoton();
+        } else {
+            siguiente.manejarAyuda();
+        }
+    }
+
+    private boolean ayudaEsNecesariaParaBoton() {
+        // Lógica para determinar si se necesita ayuda para un botón
+    }
+
+    private void mostrarAyudaParaBoton() {
+        // Lógica para mostrar ayuda para un botón
+    }
+}
+
+
+public class ManejadorDeAyudaPantalla extends ManejadorDeAyuda {
+    public ManejadorDeAyudaPantalla(ManejadorDeAyuda siguiente) {
+        super(siguiente);
+    }
+
+    public void manejarAyuda() {
+        if (ayudaEsNecesariaParaPantalla()) {
+            mostrarAyudaParaPantalla();
+        } else {
+            siguiente.manejarAyuda();
+        }
+    }
+
+    private boolean ayudaEsNecesariaParaPantalla() {
+        // Lógica para determinar si se necesita ayuda para una pantalla
+    }
+
+    private void mostrarAyudaParaPantalla() {
+        // Lógica para mostrar ayuda para una pantalla
+    }
+}
+
+
+public class Principal {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        ManejadorDeAyuda manejadorDeAyudaBoton = new ManejadorDeAyudaBoton(null);
+        ManejadorDeAyuda manejadorDeAyudaPantalla = new ManejadorDeAyudaPantalla(manejadorDeAyudaBoton);
+        ManejadorDeAyuda manejadorDeAyudaAplicacion = new ManejadorDeAyudaAplicacion(manejadorDeAyudaPantalla);
+
+        manejadorDeAyudaAplicacion.manejarAyuda();
+    }
+}
